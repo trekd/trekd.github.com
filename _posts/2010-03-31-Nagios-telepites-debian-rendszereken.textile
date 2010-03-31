@@ -1,5 +1,5 @@
 ---
-title: Nagios telepitese debian alapu rendszereken
+title: Nagios telepítése debian alapú rendszereken
 layout: post
 published: false
 tags:
@@ -9,8 +9,14 @@ tags:
 
 h1. {{page.title}}
 
-A cégnél ahol dolgozom, meglehetosen sok rendszer kell figyelnunk illetve karban tartanunk. Ha pedig hiba merul fel minel gyorsabban megoldast kell talalnunk ra. Ahhoz, hogy a problema *jelentkezese* es *felismerese* kozotti idotartamot minimalisra csokkentsuk a "Nagios":http://nagios.org/ rendszerfelugyeleti szoftvert valasztottuk.
+A cégnél ahol dolgozom, meglehetõsen sok rendszer kell figyelnünk illetve karban tartanunk. Ha pedig hiba merul fel minél gyorsabban megoldást kell találnunk rá. Ahhoz, hogy a problema *jelentkezése* és *felismerése* közötti idõtartamot minimálisra csökkentsük a "Nagios":nagios rendszerfelügyeleti szoftvert választottuk.
+
+A "Nagios":nagios segítségével, nem csak a rendszerek és szolgáltatások *monitorozása* oldaható meg, hanem hiba bekövetkezése esetén a riasztási lánc felállítása és *értesítése*, illetve automatikus *reagálást* is konfigurálhatunk.
+
+h2. Elõkészületek
 
 h2. Telepités
 
+h2. Konfigurálás
 
+[nagios]:http://nagios.org/
