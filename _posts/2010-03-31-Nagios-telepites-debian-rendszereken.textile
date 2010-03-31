@@ -1,0 +1,16 @@
+---
+title: Nagios telepitese debian alapu rendszereken
+layout: post
+published: false
+tags:
+  - unix 
+  - nagios
+---
+
+h1. {{page.title}}
+
+A cégnél ahol dolgozom, meglehetosen sok rendszer kell figyelnunk illetve karban tartanunk. Ha pedig hiba merul fel minel gyorsabban megoldast kell talalnunk ra. Ahhoz, hogy a problema *jelentkezese* es *felismerese* kozotti idotartamot minimalisra csokkentsuk a "Nagios":http://nagios.org/ rendszerfelugyeleti szoftvert valasztottuk.
+
+h2. Telepités
+
+
