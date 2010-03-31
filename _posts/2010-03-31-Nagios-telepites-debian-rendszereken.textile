@@ -1,7 +1,7 @@
 ---
 title: Nagios telepítése debian alapú rendszereken
 layout: post
-published: false
+published: true
 tags:
   - unix 
   - nagios
@@ -15,7 +15,25 @@ A "Nagios":nagios segítségével, nem csak a rendszerek és szolgáltatások *m
 
 h2. Elõkészületek
 
+Telepítési környezetnek egy Ubuntu 9.0.4-es verziót választottam. teljesen alap telepitessel. Amire mindenképpen szükségünk lesz:
+* Apache vagy más egyéb CGI futtatásra képes webszerver
+* PHP -- A legfrissebb Nagios néhány részét már php-ben írták meg. Sajnos ez igen keves részt érint.
+* @build-essential@ csomag -- ez akkor fog kelleni ha forrásból telepítjuk a Nagios-t
+* ... és néhány egyéb csomag ami a fordítássorán lesz szükséges.
+
+bq(note). Megjegyzem, hogy egszerûen csomagból is lehet telepíteni, amivel sokminden kis extra beállítástól fosztjuk meg magunkat.
+@# apt-get install nagios3@
+
+Ha továbbra is válalkoznátok a forrásból való telepítésre, akkor a következõ parancsokkal gyorsan feltehetõek a késõbbi függõségek.
+
+bc. # apt-get install apache2 libapache2-mod-php5 \
+build-essential libgd2-xpm-dev libperl-dev libssl-dev
+
+Ha a fenti csomagok a rendszerünk részét képezik, akkor készek is vagyunk a lényeg elkezdésére.
+
 h2. Telepités
+
+folyt. köv. ...
 
 h2. Konfigurálás
 
