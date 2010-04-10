@@ -1,7 +1,7 @@
 ---
 title: Nagios telepítése debian alapú rendszereken
 layout: post
-published: true
+published: false
 tags:
   - unix 
   - nagios
@@ -9,7 +9,7 @@ tags:
 
 h1. {{page.title}}
 
-A cégnél ahol dolgozom, meglehetõsen sok rendszer kell figyelnünk illetve karban tartanunk. Ha pedig hiba merul fel minél gyorsabban megoldást kell találnunk rá. Ahhoz, hogy a problema *jelentkezése* és *felismerése* közötti idõtartamot minimálisra csökkentsük a "Nagios":nagios rendszerfelügyeleti szoftvert választottuk.
+A cégnél ahol dolgozom, meglehetõsen sok rendszert kell figyelnünk illetve karban tartanunk. Ha pedig hiba merül fel minél gyorsabban megoldást kell találnunk rá. Ahhoz, hogy a problema *jelentkezése* és *felismerése* közötti idõtartamot minimálisra csökkentsük a "Nagios":nagios rendszerfelügyeleti szoftvert választottuk.
 
 A "Nagios":nagios segítségével, nem csak a rendszerek és szolgáltatások *monitorozása* oldaható meg, hanem hiba bekövetkezése esetén a riasztási lánc felállítása és *értesítése*, illetve automatikus *reagálást* is konfigurálhatunk.
 

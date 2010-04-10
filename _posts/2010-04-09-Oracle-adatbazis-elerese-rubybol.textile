@@ -1,0 +1,109 @@
+---
+title: Oracle adatbázis elérése Ruby 1.9.1 és Sequel felhasználásával
+layout: post
+published: true
+tags: 
+  - ruby
+  - oracle
+  - instant client
+---
+
+h1. {{page.title}}
+
+Jelenleg a gyárban egy monitoring tool-on dolgozom, ami különféle adatbázisok tartalma alapján eldönti hogy örülünk, vagy sírunk. A különféle adatbázisok alatt "oracle":oracle, "sqlite":sqlite, "mysql":mysql és hasonlókat értek.
+
+A project soran "Sequel":http://sequel.rubyforge.org/ framework-öt használom, hogy ne kelljen törõdnöm a DB-k eltéréseivel. De mielõtt használhatnám a framework-öt, telepítenem kell a szükséges dolgokat.
+
+h2. Szükségletek
+
+* Oracle adatbázis valahol, ajánlom az ingyenes XE verziót.
+* Oracle Instant Clien
+* "oci8-ruby":oci8 gem
+
+h2. Oracle Instant Client telepítése
+
+Mivel nem feladatom, illetve nem is érdekel, hogy hogyan kell telepíteni egy ora adatbázis, igy ezt kihagyom (_csinálják csak a DBA-k_).
+
+Első körben ki kell deríteni hogy milyen architektúrát használunk.
+
+{% highlight sh %}
+uname -a
+{% endhighlight %}
+
+Ezután már tudni fogjuk, hogy pontosan mit is töltsünk le a Oracle "honlapjáról":(oic). A következő rpm csomagokra lesz szükségünk @.deb@ csomagok hiányában.
+
+* oracle-instantclient11.2-basic-<verzió>.<architektúra>.rpm
+* oracle-instantclient11.2-devel-<verzió>.<architektúra>.rpm
+* oracle-instantclient11.2-sqlplus-<verzió>.<architektúra>.rpm
+
+Hogy ezeket a csomagok debian alatt is használni tudjuk szükségünk lesz az @alien@ nevű kis programra, amivel @.deb@ csomagokká tudjuk alakítani. Az átalakított csomagok pedig telepíthetőek @dpkg@ segítségével.
+
+{% highlight sh %}
+sudo alien *.rpm
+sudo dpkg -i *.deb
+{% endhighlight %}
+
+Ezután be kell állítani, hogy hol is találhatóak a ora lib fájlok. A lib fájlok több helyre is kerülhetnek, attól függően, hogy melyik OIC(Oracle Instant Client)-et telepítettük.
+
+Lehetséges helyek ahol a @lib@ könyvtár elõfordulhat:
+* /usr/lib/oracle/client/<verzió>/lib
+* /usr/lib64/oracle/client64/<verzió>/lib
+* ...
+
+{% highlight sh %}
+sudo echo "path/to/ora/lib" > /etc/ld.so.conf.d/oracle.conf
+sudo ldconfig
+{% endhighlight %}
+
+Ezzel meg is volnánk, egy tesztet már végezhetünk is az @sqlplus@ segítségével.
+
+{% highlight sh %}
+sqlplus user/pass@127.0.0.1/database
+{% endhighlight %}
+
+
+h2. Ruby és rubygem-ek
+
+Hogy használni tudjuk a legújabb adatbázis adaptert a ruby-hoz, ruby-ból is a legfrissebbet kell telepítenünk, ami jelenleg a "1.9.1":ruby191. Mivel az ora adapterhez natív gem-et fogunk készíteni, nem csak az alap ruby csomagra lesz szükségünk, hanem a header fájlokra is.
+
+{% highlight sh %}
+sudo apt-get install ruby1.9.1 ruby1.9.1-dev irb1.9.1 rubygems1.9.1
+{% endhighlight %}
+
+p. Ezek után ajánlott megcsinálni a symlinkeket az egyértelműbb elérés érdekében.
+
+bq(note). Megjegyzendõ, hogy a gem parancsot nem kell külön linkelni, mivel az "alternatives":alternatives parancson keresztül érhető el.
+
+{% highlight sh %}
+sudo ln -s /usr/bin/ruby1.9.1 /usr/bin/ruby
+sudo ln -s /usr/bin/irb1.9.1 /usr/bin/irb
+{% endhighlight %}
+
+Minden szükséges dolog a rendelkezésünkre áll ahhoz, hogy telepítsük a szükséges gem-eket, és csatlakozzunk az adatbázisunkhoz. Két gem-re lesz szükségünk: *oci8-ruby* és *sequel*, illetve ezek függőségei.
+
+{% highlight sh %}
+sudo gem install oci8-ruby sequel
+{% endhighlight %}
+
+A folyamat egy kis időt fog igénybe venni, de a végén egy tökéletesen használható környezetet kapunk. Próbáljuk is ki a következő kis ruby alkalmazással.
+
+{% highlight ruby %}
+require "rubygems"
+require "sequel"
+
+DB = Sequel.connect("oracle://user/pass@example.com/database")
+p DB
+
+dataset = DB[:bunnies].where(:size => :small, :hairy => true)
+dataset.each do |row|
+  p row
+end
+{% endhighlight %}
+
+[oracle]http://oracle.com
+[sqlite]http://www.sqlite.org/
+[mysql]http://www.mysql.com/
+[oci8]http://ruby-oci8.rubyforge.org/en/
+[oic]http://www.oracle.com/technology/software/tech/oci/instantclient/index.html
+[ruby191]http://www.ruby-lang.org/en/downloads/
+[alternatives]http://linux.about.com/library/cmd/blcmdl8_alternatives.htm
