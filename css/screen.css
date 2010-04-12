@@ -205,3 +205,9 @@ ul.posts {
   #related h2 {
     margin-bottom: 1em;
   }
+
+#dsq-content h3, #dsq-authenticate {display: inline !important;}
+#dsq-authenticate {float: right !important; padding: none !important;}
+.dsq-autheneticate-copy, .dsq-options, .dsq-dc-logo, .dsq-item-trackback, #dsq-comments-title, #dsq-new-post h3 { display: none !important;}
+.dsq-login-buttons {background: none !important; paddign: 0 !important;}
+#dsq-form-area {clear: both;}
