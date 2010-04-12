@@ -91,7 +91,7 @@ A folyamat egy kis időt fog igénybe venni, de a végén egy tökéletesen hasz
 require "rubygems"
 require "sequel"
 
-DB = Sequel.connect("oracle://user/pass@example.com/database")
+DB = Sequel.connect("oracle://user:pass@example.com/database")
 p DB
 
 dataset = DB[:bunnies].where(:size => :small, :hairy => true)
